@@ -15,11 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Movie',
+      title: 'MMovie',
       builder: (context, child) {
-        return ScrollConfiguration(
-          behavior: MyBehavior(),
-          child: child!,
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: ScrollConfiguration(
+            behavior: MyBehavior(),
+            child: child!,
+          ),
         );
       },
       theme: ThemeData.light().copyWith(
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(color: Colors.black),
         ),
       ),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       navigatorKey: NavigationUtil().navigatorKey,
       initialRoute: routeSplash,
       onGenerateRoute: RouteGenerator.generate,

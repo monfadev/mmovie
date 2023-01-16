@@ -24,7 +24,9 @@ class MainScreen extends ConsumerWidget {
                   contentPadding: const EdgeInsets.only(),
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network("${Api().imageBaseURL}/w780${movieRef.item?.results?[index].backdropPath}"),
+                    child: movieRef.item?.results?[index].backdropPath != null
+                        ? Image.network("${Api().imageBaseURL}/w780${movieRef.item!.results![index].backdropPath}")
+                        : Image.asset("assets/images/no-image.png"),
                   ),
                   title: Text(movieRef.item?.results?[index].title ?? ""),
                 );

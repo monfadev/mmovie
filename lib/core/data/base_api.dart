@@ -10,11 +10,9 @@ class BaseAPI implements BaseAPIImpl {
   Dio? _dio;
   final endpoint = Api();
 
-  /// Initialize constructors
   BaseAPI() {
     _dio = Dio();
 
-    /// Only show logging in debug mode
     if (kDebugMode) {
       _dio?.interceptors.add(PrettyDioLogger(requestBody: true, requestHeader: true));
     }
@@ -26,11 +24,7 @@ class BaseAPI implements BaseAPIImpl {
     if (useToken == true) {
       header['Authorization'] = "Bearer $token";
     }
-    return Options(
-        headers: header,
-        sendTimeout: 60 * 1000, // 60 seconds
-        receiveTimeout: 60 * 1000 // 60 seconds
-        );
+    return Options(headers: header, sendTimeout: 60 * 1000, receiveTimeout: 60 * 1000);
   }
 
   @override
@@ -46,10 +40,6 @@ class BaseAPI implements BaseAPIImpl {
 
   @override
   Future<APIResponse> get(String url, {Map<String, dynamic>? param, bool? useToken, String? token, CancelToken? cancelToken}) async {
-    /// Inserting api key on every request
-    // Map<String, dynamic> params = {"apiKey": apiKey};
-    // params.addAll(param ?? {});
-
     try {
       final result = await _dio?.get(url, options: await _getHeaders(useToken: useToken, token: token), queryParameters: param, cancelToken: cancelToken);
       return _parseResponse(result);
@@ -82,9 +72,7 @@ class BaseAPI implements BaseAPIImpl {
   }
 
   void validateUnauthorized(int? statusCode, String url) async {
-    // if (statusCode == 401) {
-    /// navigate to login page
-    // }
+    //
   }
 
   Future<APIResponse> _parseResponse(Response? response) async {

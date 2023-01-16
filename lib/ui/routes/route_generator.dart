@@ -6,7 +6,7 @@ import 'route_list.dart';
 
 class RouteGenerator {
   static Route<dynamic>? generate(RouteSettings settings) {
-    final args = settings.arguments;
+    // final args = settings.arguments;
 
     switch (settings.name) {
       case routeSplash:
